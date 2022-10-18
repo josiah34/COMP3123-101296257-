@@ -30,7 +30,7 @@ routes.post('/employees', checkAuth, async(req, res) => {
 })
 
 
-routes.get('/employees', async(req, res) => {
+routes.get('/employees' , checkAuth, async(req, res) => {
     try{
         const employees = await employeeModel.find()
         res.status(200).json(employees)
@@ -40,7 +40,7 @@ routes.get('/employees', async(req, res) => {
 
 })
 
-routes.get('/employees/:id', async(req, res) => {
+routes.get('/employees/:id', checkAuth, async(req, res) => {
     try {
         const getEmployee = await employeeModel.findById(req.params.id, req.body)
         res.send(getEmployee)
@@ -51,7 +51,7 @@ routes.get('/employees/:id', async(req, res) => {
 }
 )
 
-routes.put('/employees/:id', async(req, res) => {
+routes.put('/employees/:id',  checkAuth, async(req, res) => {
     try {
         const updateEmployee = await employeeModel.findByIdAndUpdate(req.params.id, req.body)
         res.send(updateEmployee)
@@ -61,7 +61,7 @@ routes.put('/employees/:id', async(req, res) => {
 
 })
 
-routes.delete('/employees', async(req, res) => {
+routes.delete('/employees',  checkAuth, async(req, res) => {
     try {
         const deleteEmployee = await employeeModel.findByIdAndDelete(req.query.id, req.body)
         res.status(204).json({"message" : "Employee deleted"})
