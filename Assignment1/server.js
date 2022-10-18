@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-
+const cookieParser = require("cookie-parser");
+//Josiah Galloway 101296257
 // set route variables
 const employeeRoutes = require('./routes/EmployeeRoutes')
 const userRoutes = require('./routes/UserRoutes')
@@ -13,6 +14,7 @@ const DB_URL = "mongodb+srv://admin:projectsql123@cluster0.b16uair.mongodb.net/g
 const app = express()
 const jwt = require('jsonwebtoken')
 
+app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded())
 mongoose.connect(DB_URL, {
@@ -39,3 +41,4 @@ app.route("/")
 app.listen(Server_PORT, () => {
     console.log("Server is listening on port " + Server_PORT);
 });
+//Josiah Galloway 101296257

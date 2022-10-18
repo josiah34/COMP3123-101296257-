@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-
+//Josiah Galloway 101296257
 
 
 const EmployeeSchema = mongoose.Schema({
@@ -30,5 +30,5 @@ const EmployeeSchema = mongoose.Schema({
 
 
 })
-
+//Josiah Galloway 101296257
 module.exports = mongoose.model('Employee', EmployeeSchema);

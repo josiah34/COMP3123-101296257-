@@ -4,9 +4,21 @@ const routes = express.Router()
 const userRoutes = require('./UserRoutes')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
+const checkAuth = require('../middleware/check-auth')
+
+//Josiah Galloway 101296257
+
+// sample employee payload
 
 
-routes.post('/employees', async(req, res) => {
+// {
+//     "firstName": "Josiah",
+//     "lastName": "G",
+//     "email": "something@mail.com",
+//     "gender": "Male",
+//     "salary": 100000
+// }
+routes.post('/employees', checkAuth, async(req, res) => {
     const newEmployee = new employeeModel(req.body)
     try{
         await newEmployee.save()
@@ -52,7 +64,7 @@ routes.put('/employees/:id', async(req, res) => {
 routes.delete('/employees', async(req, res) => {
     try {
         const deleteEmployee = await employeeModel.findByIdAndDelete(req.query.id, req.body)
-        res.send(deleteEmployee)
+        res.status(204).json({"message" : "Employee deleted"})
     }
     catch(error){
         res.status(500).json({message: error.message})
